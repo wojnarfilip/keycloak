@@ -64,7 +64,8 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
                 + "{\"name\": \"department\", \"displayName\" : \"Department\", " + PERMISSIONS_ALL + ", \"required\":{}}"
                 + "]}");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
         waitForPage(driver, "update account information", false);
@@ -95,7 +96,8 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
                 + "{\"name\": \"contact\" }"
                 + "]}");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
         waitForPage(driver, "update account information", false);
@@ -160,7 +162,8 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
                 + "{\"name\": \"email\", " + VerifyProfileTest.PERMISSIONS_ALL + "}"
                 + "]}");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
         waitForPage(driver, "update account information", false);
@@ -204,7 +207,8 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
                 + RegisterWithUserProfileTest.UP_CONFIG_PART_INPUT_TYPES
                 + "]}");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
         waitForPage(driver, "update account information", false);
@@ -224,10 +228,10 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
                 + "{\"name\": \"department\", " + PERMISSIONS_ADMIN_EDITABLE + ", \"required\":{}}"
                 + "]}");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
-        waitForAccountManagementTitle();
         accountUpdateProfilePage.assertCurrent();
     }
 
@@ -244,10 +248,10 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
                 + "{\"name\": \"department\", " + PERMISSIONS_ALL + ", \"required\":{}, \"selector\":{\"scopes\":[\"department\"]}}"
                 + "]}");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
-        waitForAccountManagementTitle();
         accountUpdateProfilePage.assertCurrent();
     }
 
@@ -263,7 +267,8 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
                 + "{\"name\": \"department\", " + PERMISSIONS_ALL + ", \"required\":{}, \"selector\":{\"scopes\":[\"profile\"]}}"
                 + "]}");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
         waitForPage(driver, "update account information", false);
@@ -281,7 +286,8 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
                 + "{\"name\": \"department\", " + PERMISSIONS_ADMIN_EDITABLE + ", \"required\":{}}"
                 + "]}");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
         waitForPage(driver, "update account information", false);
@@ -292,7 +298,6 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
 
         updateAccountInformationPage.updateAccountInformation( "requiredReadOnlyAttributeNotRenderedAndNotBlockingRegistration", "requiredReadOnlyAttributeNotRenderedAndNotBlockingRegistration@email", "FirstAA", "LastAA");
 
-        waitForAccountManagementTitle();
         accountUpdateProfilePage.assertCurrent();
     }
 
@@ -308,7 +313,8 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
                 + "{\"name\": \"department\"," + PERMISSIONS_ALL + ", \"required\":{}, \"selector\":{\"scopes\":[\"profile\"]}}"
                 + "]}");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
         waitForPage(driver, "update account information", false);
@@ -320,7 +326,6 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
 
         updateAccountInformationPage.updateAccountInformation( "attributeRequiredAndSelectedByScopeMustBeSet", "attributeRequiredAndSelectedByScopeMustBeSet@email", "FirstAA", "LastAA", "DepartmentAA");
 
-        waitForAccountManagementTitle();
         accountUpdateProfilePage.assertCurrent();
 
         UserRepresentation user = VerifyProfileTest.getUserByUsername(testRealm(),"attributeRequiredAndSelectedByScopeMustBeSet");
@@ -341,7 +346,8 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
                 + "{\"name\": \"department\"," + PERMISSIONS_ALL + ", \"selector\":{\"scopes\":[\"profile\"]}}"
                 + "]}");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
         waitForPage(driver, "update account information", false);
@@ -350,7 +356,6 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
         Assert.assertTrue(updateAccountInformationPage.isDepartmentPresent());
         updateAccountInformationPage.updateAccountInformation( "attributeNotRequiredAndSelectedByScopeCanBeIgnored", "attributeNotRequiredAndSelectedByScopeCanBeIgnored@email", "FirstAA", "LastAA");
 
-        waitForAccountManagementTitle();
         accountUpdateProfilePage.assertCurrent();
 
         UserRepresentation user = VerifyProfileTest.getUserByUsername(testRealm(),"attributeNotRequiredAndSelectedByScopeCanBeIgnored");
@@ -371,7 +376,8 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
                 + "{\"name\": \"department\"," + PERMISSIONS_ALL + ", \"selector\":{\"scopes\":[\"profile\"]}}"
                 + "]}");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
         waitForPage(driver, "update account information", false);
@@ -380,7 +386,6 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
         Assert.assertTrue(updateAccountInformationPage.isDepartmentPresent());
         updateAccountInformationPage.updateAccountInformation( "attributeNotRequiredAndSelectedByScopeCanBeSet", "attributeNotRequiredAndSelectedByScopeCanBeSet@email", "FirstAA", "LastAA","Department AA");
 
-        waitForAccountManagementTitle();
         accountUpdateProfilePage.assertCurrent();
 
         UserRepresentation user = VerifyProfileTest.getUserByUsername(testRealm(),"attributeNotRequiredAndSelectedByScopeCanBeSet");
@@ -402,7 +407,8 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
                 + "{\"name\": \"department\"," + PERMISSIONS_ALL + ", \"required\":{}, \"selector\":{\"scopes\":[\"department\"]}}"
                 + "]}");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
         waitForPage(driver, "update account information", false);
@@ -411,7 +417,6 @@ public class KcOidcFirstBrokerLoginWithUserProfileTest extends KcOidcFirstBroker
         Assert.assertFalse(updateAccountInformationPage.isDepartmentPresent());
         updateAccountInformationPage.updateAccountInformation( "attributeRequiredButNotSelectedByScopeIsNotRenderedAndNotBlockingRegistration", "attributeRequiredButNotSelectedByScopeIsNotRenderedAndNotBlockingRegistration@email", "FirstAA", "LastAA");
 
-        waitForAccountManagementTitle();
         accountUpdateProfilePage.assertCurrent();
 
         UserRepresentation user = VerifyProfileTest.getUserByUsername(testRealm(),"attributeRequiredButNotSelectedByScopeIsNotRenderedAndNotBlockingRegistration");

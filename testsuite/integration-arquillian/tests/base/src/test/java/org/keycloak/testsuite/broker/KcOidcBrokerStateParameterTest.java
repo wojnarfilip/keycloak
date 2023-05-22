@@ -113,7 +113,8 @@ public class KcOidcBrokerStateParameterTest extends AbstractInitializedBaseBroke
 
     @Test
     public void testCorrectStateParameterButIncorrectCode() throws Exception {
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId("broker-app");
+        loginPage.open(bc.consumerRealmName());
 
         waitForPage(driver, "sign in to", true);
         loginPage.clickSocial(bc.getIDPAlias());
@@ -150,7 +151,7 @@ public class KcOidcBrokerStateParameterTest extends AbstractInitializedBaseBroke
                 .session((String) null)
                 .realm(consumerRealmId)
                 .user((String) null)
-                .client(Constants.ACCOUNT_MANAGEMENT_CLIENT_ID)
+                .client("broker-app")
                 .error("identity_provider_login_failure")
                 .assertEvent();
 

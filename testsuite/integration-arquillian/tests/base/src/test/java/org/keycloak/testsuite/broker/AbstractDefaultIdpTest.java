@@ -39,7 +39,6 @@ import org.openqa.selenium.WebElement;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.keycloak.testsuite.broker.BrokerTestTools.getConsumerRoot;
 import static org.keycloak.testsuite.broker.BrokerTestTools.waitForPage;
 
 /**
@@ -65,7 +64,8 @@ public abstract class AbstractDefaultIdpTest extends AbstractInitializedBaseBrok
         configureFlow(null);
 
         // Navigate to the auth page
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         waitForPage(driver, "sign in to", true);
 
         Assert.assertTrue("Driver should be on the initial page and nothing should have happened",
@@ -80,13 +80,12 @@ public abstract class AbstractDefaultIdpTest extends AbstractInitializedBaseBrok
         String username = "all-info-set@localhost.com";
         createUser(bc.providerRealmName(), username, "password", "FirstName");
 
-        // Navigate to the auth page
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        // Navigate to the auth page and make sure we got redirected to the remote IdP(provider) automatically
+        oauth.clientId(BROKER_APP);
+        oauth.realm(bc.consumerRealmName());
+        oauth.openLoginForm();
+        loginPage.assertCurrent(bc.providerRealmName());
         waitForPage(driver, "sign in to", true);
-
-        // Make sure we got redirected to the remote IdP automatically
-        Assert.assertTrue("Driver should be on the provider realm page right now",
-                driver.getCurrentUrl().contains("/auth/realms/" + bc.providerRealmName() + "/"));
     }
 
     protected void testDefaultIdpSetTriedAndReturnedError(String expectedErrorMessageOnLoginScreen) {
@@ -96,13 +95,12 @@ public abstract class AbstractDefaultIdpTest extends AbstractInitializedBaseBrok
         String username = "all-info-set@localhost.com";
         createUser(bc.providerRealmName(), username, "password", "FirstName");
 
-        // Navigate to the auth page
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        // Navigate to the auth page and make sure we got redirected to the remote IdP(provider) automatically
+        oauth.clientId(BROKER_APP);
+        oauth.realm(bc.consumerRealmName());
+        oauth.openLoginForm();
+        loginPage.assertCurrent(bc.providerRealmName());
         waitForPage(driver, "sign in to", true);
-
-        // Make sure we got redirected to the remote IdP automatically
-        Assert.assertTrue("Driver should be on the provider realm page right now",
-                driver.getCurrentUrl().contains("/auth/realms/" + bc.providerRealmName() + "/"));
 
         // Attempt login
         log.debug("Logging in");

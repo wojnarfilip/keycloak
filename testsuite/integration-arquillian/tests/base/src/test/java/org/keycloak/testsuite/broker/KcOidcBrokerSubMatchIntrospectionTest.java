@@ -51,7 +51,8 @@ public class KcOidcBrokerSubMatchIntrospectionTest extends AbstractBrokerTest {
 
     @Override
     public void testLogInAsUserInIDP() {
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
 
         oauth.realm(bc.consumerRealmName());
         oauth.clientId("consumer-client");

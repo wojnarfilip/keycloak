@@ -200,7 +200,8 @@ public class KcOidcFirstBrokerLoginNewAuthTest extends AbstractInitializedBaseBr
         user.update(userRep);
 
         // Login. TOTP will be required at login time.
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         loginPage.login(username, "password");
 
         totpPage.assertCurrent();
@@ -216,7 +217,8 @@ public class KcOidcFirstBrokerLoginNewAuthTest extends AbstractInitializedBaseBr
 
     // Login with broker and click "Link account"
     private void loginWithBrokerAndConfirmLinkAccount() {
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
 
         logInWithBroker(bc);
 
@@ -228,8 +230,7 @@ public class KcOidcFirstBrokerLoginNewAuthTest extends AbstractInitializedBaseBr
 
 
     private void assertUserAuthenticatedInConsumer(String consumerRealmUserId) {
-        waitForAccountManagementTitle();
-        accountUpdateProfilePage.assertCurrent();
+        appPage.assertCurrent();
         assertNumFederatedIdentities(consumerRealmUserId, 1);
     }
 

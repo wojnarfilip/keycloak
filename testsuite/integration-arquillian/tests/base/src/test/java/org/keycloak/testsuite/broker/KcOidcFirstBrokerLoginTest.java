@@ -45,7 +45,8 @@ public class KcOidcFirstBrokerLoginTest extends AbstractFirstBrokerLoginTest {
         String username = "firstandlastname";
         createUser(bc.providerRealmName(), username, BrokerTestConstants.USER_PASSWORD, firstname, lastname, "firstnamelastname@example.org");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithIdp(bc.getIDPAlias(), username, BrokerTestConstants.USER_PASSWORD);
 
         accountUpdateProfilePage.assertCurrent();
@@ -71,10 +72,10 @@ public class KcOidcFirstBrokerLoginTest extends AbstractFirstBrokerLoginTest {
             adminClient.realm(bc.providerRealmName()).clients().create(samlClient);
             consumerRealm.identityProviders().create(samlBroker);
 
-            driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+            oauth.clientId(BROKER_APP);
+            loginPage.open(bc.consumerRealmName());
 
             logInWithBroker(samlBrokerConfig);
-            waitForAccountManagementTitle();
             accountUpdateProfilePage.assertCurrent();
             logoutFromRealm(getConsumerRoot(), bc.consumerRealmName());
 
@@ -95,7 +96,6 @@ public class KcOidcFirstBrokerLoginTest extends AbstractFirstBrokerLoginTest {
 
             log.debug("Clicking social " + samlBrokerConfig.getIDPAlias());
             loginPage.clickSocial(samlBrokerConfig.getIDPAlias());
-            waitForAccountManagementTitle();
             accountUpdateProfilePage.assertCurrent();
 
             assertNumFederatedIdentities(consumerRealm.users().search(samlBrokerConfig.getUserLogin()).get(0).getId(), 2);
@@ -126,10 +126,10 @@ public class KcOidcFirstBrokerLoginTest extends AbstractFirstBrokerLoginTest {
             consumerRealm.identityProviders().create(samlBroker);
             consumerRealm.identityProviders().create(oidcBroker);
 
-            driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+            oauth.clientId(BROKER_APP);
+            loginPage.open(bc.consumerRealmName());
 
             logInWithBroker(samlBrokerConfig);
-            waitForAccountManagementTitle();
             accountUpdateProfilePage.assertCurrent();
             logoutFromRealm(getConsumerRoot(), bc.consumerRealmName());
 
@@ -155,7 +155,6 @@ public class KcOidcFirstBrokerLoginTest extends AbstractFirstBrokerLoginTest {
 
             log.debug("Clicking social " + samlBrokerConfig.getIDPAlias());
             loginPage.clickSocial(samlBrokerConfig.getIDPAlias());
-            waitForAccountManagementTitle();
             accountUpdateProfilePage.assertCurrent();
 
             assertNumFederatedIdentities(consumerRealm.users().search(samlBrokerConfig.getUserLogin()).get(0).getId(), 2);
@@ -181,7 +180,8 @@ public class KcOidcFirstBrokerLoginTest extends AbstractFirstBrokerLoginTest {
             adminClient.realm(bc.providerRealmName()).clients().create(samlClient);
             consumerRealm.identityProviders().create(samlBroker);
 
-            driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+            oauth.clientId(BROKER_APP);
+            loginPage.open(bc.consumerRealmName());
 
             createUser(bc.getUserLogin());
 
@@ -226,7 +226,8 @@ public class KcOidcFirstBrokerLoginTest extends AbstractFirstBrokerLoginTest {
             adminClient.realm(bc.providerRealmName()).clients().create(samlClient);
             consumerRealm.identityProviders().create(samlBroker);
 
-            driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+            oauth.clientId(BROKER_APP);
+            loginPage.open(bc.consumerRealmName());
             logInWithBroker(samlBrokerConfig);
             waitForPage(driver, "update account information", false);
             updateAccountInformationPage.updateAccountInformation("FirstName", "LastName");
@@ -241,7 +242,6 @@ public class KcOidcFirstBrokerLoginTest extends AbstractFirstBrokerLoginTest {
             // User is federated after log in with the original broker
             log.debug("Clicking social " + samlBrokerConfig.getIDPAlias());
             loginPage.clickSocial(samlBrokerConfig.getIDPAlias());
-            waitForAccountManagementTitle();
             accountUpdateProfilePage.assertCurrent();
 
             assertNumFederatedIdentities(consumerRealm.users().search(samlBrokerConfig.getUserLogin()).get(0).getId(), 1);
@@ -256,7 +256,8 @@ public class KcOidcFirstBrokerLoginTest extends AbstractFirstBrokerLoginTest {
         updateExecutions(AbstractBrokerTest::setUpMissingUpdateProfileOnFirstLogin);
 
         createUser(bc.providerRealmName(), "no-first-name", "password", null, "LastName", "no-first-name@localhost.com");
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         log.debug("Clicking social " + bc.getIDPAlias());
         loginPage.clickSocial(bc.getIDPAlias());
         waitForPage(driver, "sign in to", true);
@@ -273,7 +274,6 @@ public class KcOidcFirstBrokerLoginTest extends AbstractFirstBrokerLoginTest {
         assertEquals("Please specify username.", loginUpdateProfilePage.getInputErrors().getUsernameError());
         
         updateAccountInformationPage.updateAccountInformation("new-username", "no-first-name@localhost.com", "First Name", "Last Name");
-        waitForAccountManagementTitle();
         accountUpdateProfilePage.assertCurrent();
         Assert.assertEquals("First Name", accountUpdateProfilePage.getFirstName());
         Assert.assertEquals("Last Name", accountUpdateProfilePage.getLastName());
@@ -292,7 +292,8 @@ public class KcOidcFirstBrokerLoginTest extends AbstractFirstBrokerLoginTest {
 
         createUser(bc.providerRealmName(), "idp-cancel-test", "password", "IDP", "Cancel", "idp-cancel@localhost.com");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
 
         loginPage.clickRegister();
         registerPage.clickBackToLogin();

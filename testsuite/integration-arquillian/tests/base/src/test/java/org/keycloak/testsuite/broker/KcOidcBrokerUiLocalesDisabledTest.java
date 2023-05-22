@@ -40,7 +40,8 @@ public class KcOidcBrokerUiLocalesDisabledTest extends AbstractBrokerTest {
 
     @Override
     protected void loginUser() {
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
 
         driver.navigate().to(driver.getCurrentUrl());
 

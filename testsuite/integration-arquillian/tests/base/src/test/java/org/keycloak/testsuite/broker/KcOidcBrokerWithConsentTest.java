@@ -3,7 +3,6 @@ package org.keycloak.testsuite.broker;
 import static org.junit.Assert.assertEquals;
 import static org.keycloak.testsuite.broker.BrokerRunOnServerUtil.removeBrokerExpiredSessions;
 import static org.keycloak.testsuite.broker.BrokerTestTools.waitForPage;
-import static org.keycloak.testsuite.broker.BrokerTestTools.getConsumerRoot;
 
 import java.util.List;
 
@@ -51,7 +50,8 @@ public class KcOidcBrokerWithConsentTest extends AbstractInitializedBaseBrokerTe
      */
     @Test
     public void testConsentDeniedWithExpiredClientSession() {
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         log.debug("Clicking social " + bc.getIDPAlias());
         loginPage.clickSocial(bc.getIDPAlias());
         waitForPage(driver, "sign in to", true);
@@ -78,7 +78,8 @@ public class KcOidcBrokerWithConsentTest extends AbstractInitializedBaseBrokerTe
      */
     @Test
     public void testConsentDeniedWithExpiredAndClearedClientSession() {
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
         // Set time offset
@@ -105,7 +106,8 @@ public class KcOidcBrokerWithConsentTest extends AbstractInitializedBaseBrokerTe
     @Test
     public void testLoginCancelConsent() {
         updateExecutions(AbstractBrokerTest::disableUpdateProfileOnFirstLogin);
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
 
         // User rejected consent

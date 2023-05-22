@@ -137,6 +137,8 @@ public abstract class AbstractBaseBrokerTest extends AbstractKeycloakTest {
 
     protected String userId;
 
+    protected final String BROKER_APP = "broker-app";
+
     /**
      * Returns a broker configuration. Return value should not change between calls.
      * @return
@@ -219,13 +221,15 @@ public abstract class AbstractBaseBrokerTest extends AbstractKeycloakTest {
     }
 
     protected void logInAsUserInIDP() {
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
     }
 
     // We are re-authenticating to the IDP. Hence it is assumed that "username" field is not visible on the login form on the IDP side
     protected void logInAsUserInIDPWithReAuthenticate() {
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
 
         waitForPage(driver, "sign in to", true);
         log.debug("Clicking social " + bc.getIDPAlias());
@@ -259,7 +263,6 @@ public abstract class AbstractBaseBrokerTest extends AbstractKeycloakTest {
 
     protected void logInAsUserInIDPForFirstTimeAndAssertSuccess() {
         logInAsUserInIDPForFirstTime();
-        assertLoggedInAccountManagement();
     }
 
     protected void updateAccountInformation() {
@@ -276,11 +279,6 @@ public abstract class AbstractBaseBrokerTest extends AbstractKeycloakTest {
 
     protected String getAccountUrl(String contextRoot, String realmName) {
         return contextRoot + "/auth/realms/" + realmName + "/account";
-    }
-
-
-    protected String getAccountPasswordUrl(String contextRoot, String realmName) {
-        return contextRoot + "/auth/realms/" + realmName + "/account/password";
     }
 
     /**
@@ -394,23 +392,6 @@ public abstract class AbstractBaseBrokerTest extends AbstractKeycloakTest {
             log.debug(driver.getPageSource());
             Assert.fail("Timeout while waiting for login page");
         }
-    }
-
-
-    protected void assertLoggedInAccountManagement() {
-        assertLoggedInAccountManagement(bc.getUserLogin(), bc.getUserEmail());
-    }
-
-    protected void assertLoggedInAccountManagement(String username, String email) {
-        waitForAccountManagementTitle();
-        Assert.assertTrue(accountUpdateProfilePage.isCurrent());
-        Assert.assertEquals(accountUpdateProfilePage.getUsername(), username);
-        Assert.assertEquals(accountUpdateProfilePage.getEmail(), email);
-    }
-
-    protected void waitForAccountManagementTitle() {
-        final String title = "Keycloak account management";
-        waitForPage(driver, title, true);
     }
 
     protected void assertErrorPage(String expectedError) {

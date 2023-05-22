@@ -16,7 +16,8 @@ public class KcSamlBrokerLoginHintWithOptionEnabledTest extends AbstractSamlLogi
         String username = "all-info-set@localhost.com";
         createUser(bc.providerRealmName(), username, "password", "FirstName");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId("broker-app");
+        loginPage.open(bc.consumerRealmName());
         log.debug("Clicking social " + bc.getIDPAlias());
         String fishyLoginHint = "<an-xml-tag>";
         addLoginHintOnSocialButton(fishyLoginHint);

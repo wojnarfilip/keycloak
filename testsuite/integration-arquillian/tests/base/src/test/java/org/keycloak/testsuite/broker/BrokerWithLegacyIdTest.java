@@ -86,7 +86,6 @@ public class BrokerWithLegacyIdTest extends AbstractInitializedBaseBrokerTest {
         logInAsUserInIDP();
         // id should be migrated to new one
         assertEquals(userId, getFederatedIdentity().getUserId());
-        assertLoggedInAccountManagement(consumerUser.getUsername(), consumerUser.getEmail());
 
         logoutFromRealm(getProviderRoot(), bc.providerRealmName());
         logoutFromRealm(getConsumerRoot(), bc.consumerRealmName());
@@ -94,7 +93,6 @@ public class BrokerWithLegacyIdTest extends AbstractInitializedBaseBrokerTest {
         // try to login again to double check the new ID works
         logInAsUserInIDP();
         assertEquals(userId, getFederatedIdentity().getUserId());
-        assertLoggedInAccountManagement(consumerUser.getUsername(), consumerUser.getEmail());
     }
 
     private FederatedIdentityRepresentation getFederatedIdentity() {

@@ -21,7 +21,8 @@ public abstract class AbstractSamlLoginHintTest extends AbstractInitializedBaseB
         String username = "all-info-set@localhost.com";
         createUser(bc.providerRealmName(), username, "password");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         log.debug("Clicking social " + bc.getIDPAlias());
         addLoginHintOnSocialButton(username);
         loginPage.clickSocial(bc.getIDPAlias());
@@ -43,7 +44,8 @@ public abstract class AbstractSamlLoginHintTest extends AbstractInitializedBaseB
         String username = "all-info-set@localhost.com";
         createUser(bc.providerRealmName(), username, "password", "FirstName");
 
-        driver.navigate().to(getAccountUrl(getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         log.debug("Clicking social " + bc.getIDPAlias());
         addLoginHintOnSocialButton("");
         loginPage.clickSocial(bc.getIDPAlias());

@@ -29,7 +29,6 @@ import org.keycloak.representations.idm.UserRepresentation;
 import org.keycloak.testsuite.AssertEvents;
 import org.keycloak.userprofile.UserProfileContext;
 
-import static org.keycloak.testsuite.AssertEvents.DEFAULT_USERNAME;
 import static org.keycloak.testsuite.broker.BrokerTestConstants.IDP_OIDC_ALIAS;
 
 /**
@@ -74,7 +73,7 @@ public final class KcOidcBrokerEventTest extends AbstractBrokerTest {
 
         events.expect(EventType.IDENTITY_PROVIDER_FIRST_LOGIN)
                 .realm(consumerRealm.toRepresentation().getId())
-                .client("account")
+                .client(BROKER_APP)
                 .user((String)null)
                 .detail(Details.IDENTITY_PROVIDER, IDP_OIDC_ALIAS)
                 .detail(Details.IDENTITY_PROVIDER_USERNAME, bc.getUserLogin())
@@ -82,14 +81,14 @@ public final class KcOidcBrokerEventTest extends AbstractBrokerTest {
 
         events.expect(EventType.UPDATE_PROFILE)
                 .realm(consumerRealm.toRepresentation().getId())
-                .client("account")
+                .client(BROKER_APP)
                 .user((String)null)
                 .detail(Details.CONTEXT, UserProfileContext.IDP_REVIEW.name())
                 .assertEvent();
 
         events.expect(EventType.REGISTER)
                 .realm(consumerRealm.toRepresentation().getId())
-                .client("account")
+                .client(BROKER_APP)
                 .user(consumerUserId == null? Matchers.any(String.class) : Matchers.is(consumerUserId))
                 .session((String) null)
                 .detail(Details.USERNAME, bc.getUserLogin())
@@ -99,7 +98,7 @@ public final class KcOidcBrokerEventTest extends AbstractBrokerTest {
 
         events.expect(EventType.LOGIN)
                 .realm(consumerRealm.toRepresentation().getId())
-                .client("account")
+                .client(BROKER_APP)
                 .user(consumerUserId == null? Matchers.any(String.class) : Matchers.is(consumerUserId))
                 .session(Matchers.any(String.class))
                 .detail(Details.USERNAME, bc.getUserLogin())
@@ -150,7 +149,8 @@ public final class KcOidcBrokerEventTest extends AbstractBrokerTest {
         events.clear();
 
         // navigate to the account url of the consumer realm
-        driver.navigate().to(getAccountUrl(BrokerTestTools.getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
 
         // Do a wrong login with a user that does not exist
         loginPage.login("wrong-user", "wrong-password");
@@ -158,7 +158,7 @@ public final class KcOidcBrokerEventTest extends AbstractBrokerTest {
         events.expect(EventType.LOGIN_ERROR)
                 .realm(consumerRealm.toRepresentation().getId())
                 .user((String) null)
-                .client("account")
+                .client(BROKER_APP)
                 .session((String) null)
                 .detail(Details.USERNAME, "wrong-user")
                 .error("user_not_found")
@@ -235,10 +235,11 @@ public final class KcOidcBrokerEventTest extends AbstractBrokerTest {
         Integer userCount = adminClient.realm(bc.consumerRealmName()).users().count();
 
         // now do the second login
-        driver.navigate().to(getAccountUrl(BrokerTestTools.getConsumerRoot(), bc.consumerRealmName()));
+        oauth.clientId(BROKER_APP);
+        loginPage.open(bc.consumerRealmName());
         logInWithBroker(bc);
+        appPage.assertCurrent();
 
-        Assert.assertEquals(accountPage.buildUri().toASCIIString().replace("master", "consumer") + "/", driver.getCurrentUrl());
         Assert.assertEquals(userCount, adminClient.realm(bc.consumerRealmName()).users().count());
 
         checkLoginEvents(providerRealm, consumerRealm, providerUser.getId(), consumerUser.getId());
@@ -265,8 +266,8 @@ public final class KcOidcBrokerEventTest extends AbstractBrokerTest {
 
         // now perform the login via the broker
         logInWithBroker(bc);
+        appPage.assertCurrent();
 
-        Assert.assertEquals(accountPage.buildUri().toASCIIString().replace("master", "consumer") + "/", driver.getCurrentUrl());
         Assert.assertEquals(userCount, adminClient.realm(bc.consumerRealmName()).users().count());
 
         checkLoginEvents(providerRealm, consumerRealm, providerUser.getId(), consumerUser.getId());

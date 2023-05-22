@@ -63,7 +63,6 @@ public abstract class AbstractUserSessionLimitsBrokerTest extends AbstractInitia
 
     private void loginTwiceAndVerifyBehavior(String behavior) {
         logInAsUserInIDPForFirstTime();
-        assertLoggedInAccountManagement();
 
         deleteAllCookiesForRealm(bc.consumerRealmName());
         deleteAllCookiesForRealm(bc.providerRealmName());
@@ -71,7 +70,6 @@ public abstract class AbstractUserSessionLimitsBrokerTest extends AbstractInitia
         logInAsUserInIDP();
 
         if (UserSessionLimitsAuthenticatorFactory.TERMINATE_OLDEST_SESSION.equals(behavior)) {
-            assertLoggedInAccountManagement();
             testingClient.server(bc.consumerRealmName()).run(assertSessionCount(bc.consumerRealmName(), bc.getUserLogin(), 1));
         }
         else if (UserSessionLimitsAuthenticatorFactory.DENY_NEW_SESSION.equals(behavior)) {

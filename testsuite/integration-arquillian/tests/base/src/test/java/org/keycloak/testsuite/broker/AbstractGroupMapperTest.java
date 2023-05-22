@@ -86,7 +86,6 @@ public abstract class AbstractGroupMapperTest extends AbstractIdentityProviderMa
         updateUser();
 
         logInAsUserInIDP();
-        assertLoggedInAccountManagement();
 
         user = findUser(bc.consumerRealmName(), bc.getUserLogin(), bc.getUserEmail());
         return user;
