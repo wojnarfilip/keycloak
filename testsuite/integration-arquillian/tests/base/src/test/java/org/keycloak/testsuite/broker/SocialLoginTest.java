@@ -387,6 +387,8 @@ public class SocialLoginTest extends AbstractKeycloakTest {
     public void twitterLogin() {
         setTestProvider(TWITTER);
         performLogin();
+        navigateToLoginPage();
+        assertUpdateProfile(false, false, true);
         appPage.assertCurrent();
     }
 
@@ -488,6 +490,7 @@ public class SocialLoginTest extends AbstractKeycloakTest {
 
     private void performLogin() {
         navigateToLoginPage();
+        System.out.println("Current web url before login: " + driver.getCurrentUrl());
         doLogin();
     }
 
@@ -518,7 +521,7 @@ public class SocialLoginTest extends AbstractKeycloakTest {
         loginPage.clickSocial(currentTestProvider.id());
 
         // Just to be sure there's no redirect in progress
-        WaitUtils.pause(3000);
+        WaitUtils.pause(10000);
         WaitUtils.waitForPageToLoad();
     }
 
@@ -531,7 +534,7 @@ public class SocialLoginTest extends AbstractKeycloakTest {
         } else {
             log.infof("already logged in to '%s'; skipping the login process", currentTestProvider.id());
         }
-        WaitUtils.pause(3000);
+        WaitUtils.pause(90000);
         WaitUtils.waitForPageToLoad();
     }
 
@@ -703,4 +706,5 @@ public class SocialLoginTest extends AbstractKeycloakTest {
             checkFeature(501, username);
         }
     }
+
 }

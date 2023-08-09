@@ -17,7 +17,7 @@
 
 package org.keycloak.testsuite.pages.social;
 
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -40,18 +40,26 @@ public class GoogleLoginPage extends AbstractSocialLoginPage {
     @FindBy(xpath = "//form//ul/li/div[@role='link']")
     private List<WebElement> selectAccountLinks;
 
+    @FindBy(xpath = "//span[text()='Next']")
+    private WebElement nextButton;
+
     @Override
     public void login(String user, String password) {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+
         if (selectAccountLinks.size() > 1) {
             clickLink(selectAccountLinks.get(selectAccountLinks.size() - 1));
         }
 
-        emailInput.clear();
-        emailInput.sendKeys(user);
-        emailInput.sendKeys(Keys.RETURN);
-        pause(3000); // wait for some animation or whatever
-        passwordInput.sendKeys(password);
-        passwordInput.sendKeys(Keys.RETURN);
+        executor.executeScript("arguments[0].value = arguments[1];", emailInput, user);
+        executor.executeScript("arguments[0].dispatchEvent(new Event('input'));", emailInput);
+        executor.executeScript("arguments[0].click();", nextButton);
+        pause(3000); // wait for password input form to load
+
+        executor.executeScript("arguments[0].value = arguments[1];", passwordInput, password);
+        executor.executeScript("arguments[0].dispatchEvent(new Event('input'));", passwordInput);
+        executor.executeScript("arguments[0].click();", nextButton);
+        pause(3000);
     }
 
     @Override

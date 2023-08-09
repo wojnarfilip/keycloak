@@ -17,6 +17,7 @@
 
 package org.keycloak.testsuite.pages.social;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,23 +45,24 @@ public class PayPalLoginPage extends AbstractSocialLoginPage {
 
     @Override
     public void login(String user, String password) {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         try {
             usernameInput.clear(); // to remove pre-filled email
             usernameInput.sendKeys(user);
 
             try {
-                clickLink(nextButton);  // sometimes the login process is just a one step,
-                                        // sometimes it's two steps so we need to click the 'Next' button
+                executor.executeScript("arguments[0].click();", nextButton); // sometimes the login process is just a one step,
+                                                                                // sometimes it's two steps so we need to click the 'Next' button
             }
             catch (NoSuchElementException e) {
                 // one step login process, no need to click the 'Next' button
             }
 
             passwordInput.sendKeys(password);
-            clickLink(loginButton);
+            executor.executeScript("arguments[0].click();", loginButton);
         }
         catch (NoSuchElementException e) {
-            clickLink(continueLoginButton); // already logged in, just need to confirm it
+            executor.executeScript("arguments[0].click();", continueLoginButton); // already logged in, just need to confirm it
         }
     }
 }

@@ -38,6 +38,9 @@ public class BitbucketLoginPage extends AbstractSocialLoginPage {
     @FindBy(xpath = "//div[contains(@class,'additional-auths')]/p/a")
     private WebElement loginWithAtlassianButton;
 
+    @FindBy(xpath = "//button[contains(@class,'aui-button-primary')]")
+    private WebElement grantAccessButton;
+
     @Override
     public void login(String user, String password) {
         try {
@@ -54,5 +57,14 @@ public class BitbucketLoginPage extends AbstractSocialLoginPage {
 
         passwordInput.sendKeys(password);
         passwordInput.sendKeys(Keys.RETURN);
+
+        // While user logs into the app for the first time he is required to grant access to bitbucket
+        try {
+            grantAccessButton.click();
+            pause(3000);
+        }
+        catch (NoSuchElementException e) {
+            log.info("User already allowed in the app");
+        }
     }
 }
