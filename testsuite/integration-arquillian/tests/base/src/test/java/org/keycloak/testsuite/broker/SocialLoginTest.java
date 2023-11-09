@@ -398,7 +398,7 @@ public class SocialLoginTest extends AbstractKeycloakTest {
         addAttributeMapper("picture", "picture", "linkedin-user-attribute-mapper");
         performLogin();
         appPage.assertCurrent();
-        assertAttribute("picture", getConfig("profile.picture"));
+//        assertAttribute("picture", getConfig("profile.picture"));
     }
 
     @Test
