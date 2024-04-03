@@ -27,8 +27,8 @@ import jakarta.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
-import org.jboss.arquillian.graphene.page.Page;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.keycloak.admin.client.resource.UserResource;
@@ -39,8 +39,7 @@ import org.keycloak.representations.idm.EventRepresentation;
 import org.keycloak.representations.idm.RealmRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.keycloak.representations.idm.UserSessionRepresentation;
-import org.keycloak.testsuite.pages.ErrorPage;
-import org.keycloak.testsuite.pages.InfoPage;
+import org.keycloak.testsuite.pages.*;
 import org.keycloak.testsuite.util.GreenMailRule;
 import org.keycloak.testsuite.util.MailUtils;
 import org.keycloak.testsuite.util.OAuthClient;
@@ -51,11 +50,16 @@ public class RequiredActionUpdateEmailTestWithVerificationTest extends AbstractR
 	@Rule
 	public GreenMailRule greenMail = new GreenMailRule();
 
-	@Page
 	private InfoPage infoPage;
 
-	@Page
 	private ErrorPage errorPage;
+
+	@Before
+	public void before() {
+		super.before();
+		infoPage = new InfoPage(driver);
+		errorPage = new ErrorPage(driver);
+	}
 
 	protected void prepareUser(UserRepresentation user){
 		user.setEmailVerified(true);
@@ -107,7 +111,7 @@ public class RequiredActionUpdateEmailTestWithVerificationTest extends AbstractR
 
                 // add action and change email
                 configureRequiredActionsToUser("test-user@localhost", UserModel.RequiredAction.UPDATE_EMAIL.name());
-		changeEmailUsingRequiredAction("new@localhost", logoutOtherSessions);
+				changeEmailUsingRequiredAction("new@localhost", logoutOtherSessions);
 
                 events.expect(EventType.UPDATE_EMAIL)
                                 .detail(Details.PREVIOUS_EMAIL, "test-user@localhost")
