@@ -17,7 +17,7 @@
 package org.keycloak.testsuite.forms;
 
 import jakarta.ws.rs.BadRequestException;
-import org.jboss.arquillian.graphene.page.Page;
+import org.junit.Before;
 import org.junit.Test;
 import org.keycloak.common.util.Base64;
 import org.keycloak.credential.CredentialModel;
@@ -61,12 +61,16 @@ import static org.junit.Assert.fail;
  */
 public class PasswordHashingTest extends AbstractTestRealmKeycloakTest {
 
+    protected LoginPage loginPage;
+
+    @Before
+    public void before() {
+        loginPage = new LoginPage(driver);
+    }
+
     @Override
     public void configureTestRealm(RealmRepresentation testRealm) {
     }
-
-    @Page
-    protected LoginPage loginPage;
 
     @Test
     public void testSetInvalidProvider() throws Exception {
