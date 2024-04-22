@@ -18,11 +18,11 @@
 
 package org.keycloak.testsuite.federation.ldap;
 
-import org.jboss.arquillian.graphene.page.Page;
 import org.junit.Assert;
 import org.junit.ClassRule;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.runners.MethodSorters;
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.resource.UserResource;
@@ -67,10 +67,15 @@ public class LDAPReadOnlyTest extends AbstractLDAPTest  {
         return ldapRule;
     }
 
-    @Page
     protected LoginConfigTotpPage totpPage;
 
     private TimeBasedOTP totp = new TimeBasedOTP();
+
+    @Before
+    public void before(){
+        super.before();
+        totpPage = new LoginConfigTotpPage(driver);
+    }
 
     @Override
     protected void afterImportTestRealm() {
