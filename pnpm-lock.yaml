@@ -152,7 +152,7 @@ importers:
         version: 5.2.1
       '@patternfly/react-code-editor':
         specifier: ^5.2.3
-        version: 5.2.3(monaco-editor@0.47.0)(react-dom@18.2.0)(react@18.2.0)
+        version: 5.2.3(monaco-editor@0.48.0)(react-dom@18.2.0)(react@18.2.0)
       '@patternfly/react-core':
         specifier: ^5.2.3
         version: 5.2.3(react-dom@18.2.0)(react@18.2.0)
@@ -193,8 +193,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       monaco-editor:
-        specifier: ^0.47.0
-        version: 0.47.0
+        specifier: ^0.48.0
+        version: 0.48.0
       p-debounce:
         specifier: ^4.0.0
         version: 4.0.0
@@ -1445,24 +1445,24 @@ packages:
     resolution: {integrity: sha512-9b8mPpKrfeGRuhFH5iO1iwCLeIIsV6+H1sRfxbkoGXIyQE2BTsPd9zqSqQJ+pv5sJ/hT5M1zvOFL02MnEezFug==}
     dev: true
 
-  /@monaco-editor/loader@1.4.0(monaco-editor@0.47.0):
+  /@monaco-editor/loader@1.4.0(monaco-editor@0.48.0):
     resolution: {integrity: sha512-00ioBig0x642hytVspPl7DbQyaSWRaolYie/UFNjoTdvoKPzo6xrXLhTk9ixgIKcLH5b5vDOjVNiGyY+uDCUlg==}
     peerDependencies:
       monaco-editor: '>= 0.21.0 < 1'
     dependencies:
-      monaco-editor: 0.47.0
+      monaco-editor: 0.48.0
       state-local: 1.0.7
     dev: false
 
-  /@monaco-editor/react@4.6.0(monaco-editor@0.47.0)(react-dom@18.2.0)(react@18.2.0):
+  /@monaco-editor/react@4.6.0(monaco-editor@0.48.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-RFkU9/i7cN2bsq/iTkurMWOEErmYcY6JiQI3Jn+WeR/FGISH8JbHERjpS9oRuSOPvDMJI0Z8nJeKkbOs9sBYQw==}
     peerDependencies:
       monaco-editor: '>= 0.25.0 < 1'
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@monaco-editor/loader': 1.4.0(monaco-editor@0.47.0)
-      monaco-editor: 0.47.0
+      '@monaco-editor/loader': 1.4.0(monaco-editor@0.48.0)
+      monaco-editor: 0.48.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -1609,13 +1609,13 @@ packages:
     resolution: {integrity: sha512-n5xFjyj1J4eIFZ7XeU6K44POKRAuDlO5yALPbn084y+jPy1j861AaQ+zIUbzCi4IzBlHrvoXVKij7p1zy7Ditg==}
     dev: false
 
-  /@patternfly/react-code-editor@5.2.3(monaco-editor@0.47.0)(react-dom@18.2.0)(react@18.2.0):
+  /@patternfly/react-code-editor@5.2.3(monaco-editor@0.48.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-aO9BrWOMVu5vxCEnV66XmWHTWGLThfe4WYBpgytmy8kMbEd/qi5y3quJb8HRWP+osUfa+2m/+1fWAn9qgA2pQg==}
     peerDependencies:
       react: ^17 || ^18
       react-dom: ^17 || ^18
     dependencies:
-      '@monaco-editor/react': 4.6.0(monaco-editor@0.47.0)(react-dom@18.2.0)(react@18.2.0)
+      '@monaco-editor/react': 4.6.0(monaco-editor@0.48.0)(react-dom@18.2.0)(react@18.2.0)
       '@patternfly/react-core': 5.2.3(react-dom@18.2.0)(react@18.2.0)
       '@patternfly/react-icons': 5.2.1(react-dom@18.2.0)(react@18.2.0)
       '@patternfly/react-styles': 5.2.1
@@ -6790,8 +6790,8 @@ packages:
     dev: false
     optional: true
 
-  /monaco-editor@0.47.0:
-    resolution: {integrity: sha512-VabVvHvQ9QmMwXu4du008ZDuyLnHs9j7ThVFsiJoXSOQk18+LF89N4ADzPbFenm0W4V2bGHnFBztIRQTgBfxzw==}
+  /monaco-editor@0.48.0:
+    resolution: {integrity: sha512-goSDElNqFfw7iDHMg8WDATkfcyeLTNpBHQpO8incK6p5qZt5G/1j41X0xdGzpIkGojGXM+QiRQyLjnfDVvrpwA==}
     dev: false
 
   /ms@2.1.2:
@@ -9227,7 +9227,7 @@ packages:
     dependencies:
       '@keycloak/keycloak-admin-client': link:js/libs/keycloak-admin-client
       '@patternfly/patternfly': 5.2.1
-      '@patternfly/react-code-editor': 5.2.3(monaco-editor@0.47.0)(react-dom@18.2.0)(react@18.2.0)
+      '@patternfly/react-code-editor': 5.2.3(monaco-editor@0.48.0)(react-dom@18.2.0)(react@18.2.0)
       '@patternfly/react-core': 5.2.3(react-dom@18.2.0)(react@18.2.0)
       '@patternfly/react-icons': 5.2.1(react-dom@18.2.0)(react@18.2.0)
       '@patternfly/react-styles': 5.2.1
@@ -9240,7 +9240,7 @@ packages:
       i18next-http-backend: 2.5.0
       keycloak-js: link:js/libs/keycloak-js
       lodash-es: 4.17.21
-      monaco-editor: 0.47.0
+      monaco-editor: 0.48.0
       p-debounce: 4.0.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
