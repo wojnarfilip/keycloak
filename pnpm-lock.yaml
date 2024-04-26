@@ -75,8 +75,8 @@ importers:
         specifier: ^5.2.1
         version: 5.2.1(react-dom@18.2.0)(react@18.2.0)
       '@patternfly/react-table':
-        specifier: ^5.2.4
-        version: 5.2.4(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^5.3.1
+        version: 5.3.1(react-dom@18.2.0)(react@18.2.0)
       i18next:
         specifier: ^23.11.1
         version: 23.11.1
@@ -163,8 +163,8 @@ importers:
         specifier: ^5.2.1
         version: 5.2.1
       '@patternfly/react-table':
-        specifier: ^5.2.4
-        version: 5.2.4(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^5.3.1
+        version: 5.3.1(react-dom@18.2.0)(react@18.2.0)
       admin-ui:
         specifier: 'file:'
         version: file:js/apps/admin-ui(@types/react@18.2.75)
@@ -1660,6 +1660,22 @@ packages:
       tslib: 2.6.2
     dev: false
 
+  /@patternfly/react-core@5.3.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-wMCwymttWaaY3Zwh2R2rZL2asyJkB6T/QVTt13cD3/e0pVlPYw6nvws3MVyNDPReCuzmgiw0m8cvpwPobYkVXw==}
+    peerDependencies:
+      react: ^17 || ^18
+      react-dom: ^17 || ^18
+    dependencies:
+      '@patternfly/react-icons': 5.3.1(react-dom@18.2.0)(react@18.2.0)
+      '@patternfly/react-styles': 5.3.0
+      '@patternfly/react-tokens': 5.3.0
+      focus-trap: 7.5.2
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-dropzone: 14.2.3(react@18.2.0)
+      tslib: 2.6.2
+    dev: false
+
   /@patternfly/react-icons@4.93.7(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-3kr35dgba7Qz5CSzmfH0rIjSvBC5xkmiknf3SvVUVxaiVA7KRowID8viYHeZlf3v/Oa3sEewaH830Q0t+nWsZQ==}
     peerDependencies:
@@ -1680,6 +1696,16 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /@patternfly/react-icons@5.3.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-puiMzX39asr+j5adA3J1xuK5NjwKH4UAp57GoLTga9DcsPu0g8u0H3WHtunYCJzUQ8n7FvaMYFH1H0WcWlDIQQ==}
+    peerDependencies:
+      react: ^17 || ^18
+      react-dom: ^17 || ^18
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /@patternfly/react-styles@4.92.8:
     resolution: {integrity: sha512-K4lUU8O4HiCX9NeuNUIrPgN3wlGERCxJVio+PAjd8hpJD/PKnjFfOJ9u6/Cii3qLy/5ZviWPRNHbGiwA/+YUhg==}
     dev: false
@@ -1688,16 +1714,20 @@ packages:
     resolution: {integrity: sha512-GT96hzI1QenBhq6Pfc51kxnj9aVLjL1zSLukKZXcYVe0HPOy0BFm90bT1Fo4e/z7V9cDYw4SqSX1XLc3O4jsTw==}
     dev: false
 
-  /@patternfly/react-table@5.2.4(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-WCt4I6XYKRHXcasDqcOX70ctkgPVBAvlOv67KhaZsedxUU+B2NT1kiI7Jr7tD4SrR+jQs0MCF/bbRk1QM+rBqg==}
+  /@patternfly/react-styles@5.3.0:
+    resolution: {integrity: sha512-/EdkURW+v7Rzw/CiEqL+NfGtLvLMGIwOEyDhvlMDbRip2usGw4HLZv3Bep0cJe29zOeY27cDVZDM1HfyXLebtw==}
+    dev: false
+
+  /@patternfly/react-table@5.3.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-/GDsX2VeOWe5Snw2q1Fnh4q1x6qbUqVpHMB3+KvrMAYyvyjFVwplvIAslQqDNm3O0hUj11WYJ98fYgotu2dxng==}
     peerDependencies:
       react: ^17 || ^18
       react-dom: ^17 || ^18
     dependencies:
-      '@patternfly/react-core': 5.2.3(react-dom@18.2.0)(react@18.2.0)
-      '@patternfly/react-icons': 5.2.1(react-dom@18.2.0)(react@18.2.0)
-      '@patternfly/react-styles': 5.2.1
-      '@patternfly/react-tokens': 5.2.1
+      '@patternfly/react-core': 5.3.1(react-dom@18.2.0)(react@18.2.0)
+      '@patternfly/react-icons': 5.3.1(react-dom@18.2.0)(react@18.2.0)
+      '@patternfly/react-styles': 5.3.0
+      '@patternfly/react-tokens': 5.3.0
       lodash: 4.17.21
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -1710,6 +1740,10 @@ packages:
 
   /@patternfly/react-tokens@5.2.1:
     resolution: {integrity: sha512-8GYz/jnJTGAWUJt5eRAW5dtyiHPKETeFJBPGHaUQnvi/t1ZAkoy8i4Kd/RlHsDC7ktiu813SKCmlzwBwldAHKg==}
+    dev: false
+
+  /@patternfly/react-tokens@5.3.0:
+    resolution: {integrity: sha512-24ZY5hgwt11InW3XtINM5p9Fo1hDiVor6Q4uphPZh8Mt89AsZZw1UweTaGg54I0Ah2Wzv6rkQy51LX7tZtIwjQ==}
     dev: false
 
   /@pkgr/core@0.1.1:
@@ -9231,7 +9265,7 @@ packages:
       '@patternfly/react-core': 5.2.3(react-dom@18.2.0)(react@18.2.0)
       '@patternfly/react-icons': 5.2.1(react-dom@18.2.0)(react@18.2.0)
       '@patternfly/react-styles': 5.2.1
-      '@patternfly/react-table': 5.2.4(react-dom@18.2.0)(react@18.2.0)
+      '@patternfly/react-table': 5.3.1(react-dom@18.2.0)(react@18.2.0)
       dagre: 0.8.5
       file-saver: 2.0.5
       file-selector: 0.6.0
