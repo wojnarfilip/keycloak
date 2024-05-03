@@ -266,8 +266,8 @@ importers:
         specifier: ^1.5.0
         version: 1.5.0(axe-core@4.9.0)(cypress@13.7.2)
       cypress-split:
-        specifier: ^1.23.0
-        version: 1.23.0(@babel/core@7.24.4)
+        specifier: ^1.23.1
+        version: 1.23.1(@babel/core@7.24.4)
       jsdom:
         specifier: ^24.0.0
         version: 24.0.0
@@ -4047,8 +4047,8 @@ packages:
       cypress: 13.7.2
     dev: true
 
-  /cypress-split@1.23.0(@babel/core@7.24.4):
-    resolution: {integrity: sha512-tZazy4dZ4fIzsTYv1MNk6Lc0DaTAAsHUBIdfDbRGBl8QY2lvRcdYjlBs9gnOOwphjXgNTPXTT3KVbnStp0kZbQ==}
+  /cypress-split@1.23.1(@babel/core@7.24.4):
+    resolution: {integrity: sha512-MWMLCdzVkr8hTG2670Ip7bWjWFncZnnNSN4Q2+stzuhyqQmg0/pWNdEEVIfRlhwnbN05kRvgZD32mimPy5WP4w==}
     hasBin: true
     dependencies:
       '@actions/core': 1.10.1
@@ -4056,7 +4056,7 @@ packages:
       console.table: 0.10.0
       debug: 4.3.4(supports-color@8.1.1)
       fast-shuffle: 6.1.0
-      find-cypress-specs: 1.43.1(@babel/core@7.24.4)
+      find-cypress-specs: 1.43.2(@babel/core@7.24.4)
       globby: 11.1.0
       humanize-duration: 3.32.0
     transitivePeerDependencies:
@@ -5266,8 +5266,9 @@ packages:
       to-regex-range: 5.0.1
     dev: true
 
-  /find-cypress-specs@1.43.1(@babel/core@7.24.4):
-    resolution: {integrity: sha512-vJKnUL7qCrFyf8LkwIlJEHRUg+P/syBNtkxAi/vdShgA1ugAVscQKiZGqQ9ad/gXWvywmwczMVM2SP7btG5RPg==}
+  /find-cypress-specs@1.43.2(@babel/core@7.24.4):
+    resolution: {integrity: sha512-SNXfIy9CuKx/tdwzzn20kc7WxoJXyXmC4vzmttRD/z4qZ8eOxbN6ywmB/fuQtDLLQXncqNA7zLYsymhhIRcvTQ==}
+    engines: {node: '>=18'}
     hasBin: true
     dependencies:
       '@actions/core': 1.10.1
@@ -5280,7 +5281,7 @@ packages:
       pluralize: 8.0.0
       require-and-forget: 1.0.1
       shelljs: 0.8.5
-      spec-change: 1.10.0
+      spec-change: 1.11.1
       tsx: 4.7.2
     transitivePeerDependencies:
       - '@babel/core'
@@ -7958,8 +7959,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /spec-change@1.10.0:
-    resolution: {integrity: sha512-IMhfPFDbpLBBT/bjSVPLmRxPcCd43XH1MuSGgd3BxBeOLYIVvaca65C3T6cR5ouB+xKOERwsk3Y1RF46JmaquA==}
+  /spec-change@1.11.1:
+    resolution: {integrity: sha512-yH38HD5KaWssNJORlvPT9+dFB9B1RCCppnSZsqSb4JXcbOboQCsqd2miGfdXyxZIywOCwnds5/fTtY5/ZuOozA==}
     hasBin: true
     dependencies:
       arg: 5.0.2
